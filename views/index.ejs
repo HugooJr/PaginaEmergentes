@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <title>iaAzurduy</title>
+    <style>
+      body, html { height: 100%; margin: 0; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; }
+      #randomBox { padding: 20px; border-radius: 10px; text-align: center; }
+      #titulo {
+        padding: 20px; border-radius: 10px; text-align: center;
+        position: absolute;
+        color: #f0f0f0;
+        margin-top: -150px;
+      }
+      #buttons {
+        padding: 20px; border-radius: 10px; text-align: center;
+        position: absolute;
+        margin-top: 150px;
+      }
+    </style>
+    </head>
+    <body>
+    
+    <form action="/enviar" method="post">
+      <div id="titulo">Frases celebres</div>
+      <div id="randomBox" name="frase"></div>
+      <input type="text" name="ip" style="display: none;" value="<%= clientIp %>"/>
+      <input type="text" name="frase" id="frase" style="display: none;"/>
+      <input type="text" name="colorFondo" id="colorFondo" style="display: none;"/>
+      <input type="text"  name="colorLetra" id="colorLetra" style="display: none;"/>
+      
+      <div id="buttons">
+        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-default px-3" value="Me encanta"><i class="fas fa-heart" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-success px-3" value="Me divierte"><i class="bi bi-emoji-laughing-fill" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-info px-3" value="Me sorprende"><i class="bi bi-emoji-dizzy-fill" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-warning px-3" value="Me entristece"><i class="bi bi-emoji-frown-fill"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco"><i class="fas fa-solid fa-poo" aria-hidden="true"></i></button>
+      </div>
+    </form>
+    
+    
+    <script>
+      function clicks(){
+        // Obtén el botón y el elemento donde mostrar el contador
+        const boton = document.getElementById('boton');
+        const contador = document.getElementById('contador');
+        // Inicializa el contador en 0
+        let clics = 0;
+        // Agrega un evento de clic al botón
+        boton.addEventListener('click', () => {
+          // Incrementa el contador en 1 cada vez que se hace clic
+          clics++;
+          // Actualiza el texto del contador
+          contador.textContent = `Clics: ${clics}`;
+        });
+      }
+      function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+    
+      function getRandomPhrase() {
+        const phrases = [
+        "Sólo hay una persona que puede decidir lo que voy a hacer, y soy yo mismo.",
+        "Descubre quién eres y hazlo a propósito.",
+        "Sólo los soñadores mueven montañas.",
+        "La muerte nos sonríe a todos, devolvámosle la sonrisa.",
+        "Oh, sí... El pasado puede doler, pero tal como yo lo veo puedes huir de él o aprender.",
+        "Prefiero ser un optimista loco antes que un pesimista sensato.",
+        "Las causas perdidas son las únicas por las que vale la pena luchar.",
+        "Nací cuando ella me besó, morí el día que me abandonó, y viví el tiempo que me amó.",
+        "Llamar a alguien gorda no te hace estar más delgada, llamar a alguien estúpida no te hace más lista y arruinarle la vida a Regina George no me hizo más feliz, todo lo que puedes hacer en la vida es intentar resolver el problema que tienes delante.",
+        "Nuestro amor es como el viento, no puedo verlo pero si sentirlo.",
+        "Pensamos demasiado y sentimos muy poco…",
+        "Enterramos nuestros pecados, lavamos nuestras conciencias.",
+        "El odio me llevó a la cárcel, el amor me dará la libertad.",
+        "No quiero necesitarte… porque no puedo tenerte.",
+        "Sólo tú puedes decidir qué hacer con el tiempo que se te ha dado.",
+        "¿Porque la gente buena elige salir con personas equivocadas? Porque aceptamos el amor que creemos merecer. ¿Se les puede hacer notar que merecen más? Podemos intentar.",
+        "Mi conclusión es que el odio es un lastre. La vida es demasiado corta para estar siempre cabreado.",
+        "Los finales felices son historias sin acabar.",
+        "Nunca dejes que nadie te diga que no puedes hacer algo. Ni siquiera yo. Si tienes un sueño, tienes que protegerlo. Las personas que no son capaces de hacer algo por ellos mismos, te dirán que tú tampoco puedes hacerlo. ¿Quieres algo? Ve por ello y punto.",
+        "No me acuerdo de olvidarte",
+        "Todos los hombres mueren, pero no todos han vivido.",
+        "Amar significa no tener que decir nunca lo siento.",
+        "Las ilusiones pueden ser muy poderosas.",
+        "El mejor amigo de un chico es su madre.",
+        "Me haces querer ser un hombre mejor.",
+        "Hazlo o no lo hagas, pero no lo intentes.",
+        "Podrán quitarnos la vida, pero nunca podrán arrebatarnos la libertad.",
+        "¿De qué sirve confesarme si no me arrepiento?",
+        "Cada minuto que pasa es otra oportunidad de seguir cambiando.",
+        "Todos esos momentos se perderán en el tiempo como lágrimas en la lluvia.",
+        "Mantén cerca a tus amigos, pero más cerca a tus enemigos.",
+        "Con cada combate te haces más fuerte.",
+        "Ahora puedo decirte que tomé la decisión correcta, sin embargo, no hay un día que pase sin arrepentirme de no haber tomado una opción diferente.",
+        "No hay dos palabras que sean más dañinas en nuestro idioma que ‘buen trabajo’.",
+        "Dices que quieres morir por amor, pero no sabes nada de la muerte, ni sabes nada del amor.",
+        "No existen preguntas sin respuesta, solo preguntas mal formuladas.",
+        "Yo no digo mentiras, le doy amplitud a la verdad.",
+        "No son las habilidades lo que demuestra lo que somos, son nuestras decisiones.",
+        "Hay tres maneras de hacer las cosas: la correcta, la incorrecta y la mía.",
+        "Una vida que niega la libertad, no es vida.",
+        "Sin ti las emociones de hoy sólo serían las envolturas muertas de las del ayer.",
+        "Es toda una experiencia vivir con miedo, ¿verdad? Eso es lo que significa ser un esclavo.",
+        "He cruzado océanos de tiempo para encontrarte.",
+        "Todo el mundo quiere ser libre, pero una cosa es hablar de ello y otra muy diferente es serlo.",
+        "La vida es un regalo y no pienso desperdiciarla. Nunca se sabe qué cartas repartirá la próxima vez.",
+        "Todos morimos, lo que importa es el cómo y el cuándo.",
+        "Muéstrame un corazón que esté libre de necios sueños, y te enseñaré a un hombre feliz.",
+        "El momento más feliz del día es acompañarte a casa. Es el momento más triste del día cuando te dejo.",
+        "Con cada combate te haces más fuerte."
+        ];
+        return phrases[Math.floor(Math.random() * phrases.length)];
+      }
+    
+      const randomBox = document.getElementById('randomBox');
+      randomBox.style.backgroundColor = getRandomColor();
+      randomBox.innerText = getRandomPhrase();
+      randomBox.style.color = getRandomColor();
+
+      const titulo = document.getElementById('titulo');
+      titulo.style.backgroundColor = getRandomColor();
+
+      document.getElementById("frase").value = randomBox.innerText;
+      document.getElementById("colorFondo").value = randomBox.style.backgroundColor;
+      document.getElementById("colorLetra").value = randomBox.style.color;
+      
+    </script>
+    </body>
+</html>
