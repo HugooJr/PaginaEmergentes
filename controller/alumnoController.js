@@ -28,7 +28,7 @@ exports.enviar = async (req, res) => {
     };
 
     // Realiza una solicitud POST a la API con los datos
-    const response = await axios.post('https://apikrj.onrender.com/crear', datos);
+    const response = await axios.post('https://api-2g00.onrender.com/crear', datos);
 
     // Maneja la respuesta de la API como desees
     
