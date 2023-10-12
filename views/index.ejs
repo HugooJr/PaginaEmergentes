@@ -10,38 +10,52 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <title>iaAzurduy</title>
     <style>
-      body, html { height: 100%; margin: 0; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; }
-      #randomBox { padding: 20px; border-radius: 10px; text-align: center; }
+      body, html { 
+        height: 100%; 
+        width: 100%; 
+        margin: 0 0;
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        background-color: #f0f0f0; 
+      }
+      #randomBox { 
+        padding: 20px; 
+        border-radius: 10px; 
+        text-align: center; 
+        font-size: px;
+      }
       #titulo {
-        padding: 20px; border-radius: 10px; text-align: center;
-        position: absolute;
-        color: #f0f0f0;
+        padding: 20px;
+        font-family: Century Gothic;
+        border-radius: 10px; 
+        text-align: center;
         margin-top: -150px;
+        margin-bottom: 15px;
+        font-size: 30px;
       }
       #buttons {
-        padding: 20px; border-radius: 10px; text-align: center;
-        position: absolute;
-        margin-top: 150px;
+        padding: 20px; 
+        border-radius: 20px; 
+        text-align: center;
+        margin-top: 10px;
+        font-family: Century Gothic;
       }
     </style>
     </head>
     <body>
     
     <form action="/enviar" method="post">
-      <div id="titulo">Frases celebres</div>
-      <div id="randomBox" name="frase"></div>
+      <b><div id="titulo">Frases Iconicas</div></b>
+      <b><div id="randomBox" name="frase"></div></b>
       <input type="text" name="ip" style="display: none;" value="<%= clientIp %>"/>
       <input type="text" name="frase" id="frase" style="display: none;"/>
       <input type="text" name="colorFondo" id="colorFondo" style="display: none;"/>
       <input type="text"  name="colorLetra" id="colorLetra" style="display: none;"/>
       
       <div id="buttons">
-        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true"></i></button>
-        <button type="submit" name="btnReaccion" class="btn btn-warning px-3" style="color: white; background-color: red;" value="Me encanta"><i class="fas fa-heart" aria-hidden="true"></i></button>
-        <button type="submit" name="btnReaccion" class="btn btn-success px-3" value="Me divierte"><i class="bi bi-emoji-laughing-fill" aria-hidden="true"></i></button>
-        <button type="submit" name="btnReaccion" class="btn btn-info px-3" style="color: white; background-color:deeppink" value="Me sorprende"><i class="bi bi-emoji-dizzy-fill" aria-hidden="true"></i></button>
-        <button type="submit" name="btnReaccion" class="btn btn-warning px-3" style="color: white;background-color:darkblue;" value="Me entristece"><i class="bi bi-emoji-frown-fill"></i></button>
-        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" style="background-color: brown;" value="Me da asco"><i class="fas fa-solid fa-poo" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true">  Me gusta</i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco"><i class="fas fa-solid fa-poo" aria-hidden="true">  No me gusta</i></button>
       </div>
     </form>
     
@@ -124,19 +138,22 @@
         ];
         return phrases[Math.floor(Math.random() * phrases.length)];
       }
+
       const color = getRandomColor();
       const backColor = getRandomColor();
       const randomBox = document.getElementById('randomBox');
-      randomBox.style.backgroundColor = backColor;
+      //randomBox.style.backgroundColor = backColor;
       randomBox.innerText = getRandomPhrase();
       randomBox.style.color = color;
 
+      document.body.style.backgroundColor = getRandomColor();
+
       const titulo = document.getElementById('titulo');
-      titulo.style.backgroundColor = backColor;
+      //titulo.style.backgroundColor = backColor;
       titulo.style.color = color;
 
       document.getElementById("frase").value = randomBox.innerText;
-      document.getElementById("colorFondo").value = randomBox.style.backgroundColor;
+      document.getElementById("colorFondo").value = document.body.style.backgroundColor;
       document.getElementById("colorLetra").value = randomBox.style.color;
       
     </script>
