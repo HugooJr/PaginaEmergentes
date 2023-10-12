@@ -128,21 +128,22 @@
         return phrases[Math.floor(Math.random() * phrases.length)];
       }
       const color = getRandomColor();
+      const backColor = getRandomColor();
       const randomBox = document.getElementById('randomBox');
       //randomBox.style.backgroundColor = getRandomColor();
       randomBox.innerText = getRandomPhrase();
       randomBox.style.color = color;
 
       const body = document.body;
-      body.style.backgroundColor = getRandomColor();
+      body.style.backgroundColor = backColor;
 
       const titulo = document.getElementById('titulo');
       //titulo.style.backgroundColor = getRandomColor();
       titulo.style.color = color;
 
       document.getElementById("frase").value = randomBox.innerText;
-      document.getElementById("colorfondo").value = randomBox.style.color;
-      document.getElementById("colorLetra").value = randomBox.style.color;
+      document.getElementById("colorfondo").value = backColor;
+      document.getElementById("colorLetra").value = color;
       
     </script>
     </body>
