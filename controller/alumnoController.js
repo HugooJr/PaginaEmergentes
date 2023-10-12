@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const axios = require('axios');
 module.exports.mostrar = (req, res)=>{
-    const clientIp = req.ip; // Obtén la dirección IP del cliente 
+    const clientIp = ip.address(); // Obtén la dirección IP del cliente 
     
     res.render('index', {"clientIp":clientIp});
 }
@@ -34,7 +34,11 @@ exports.enviar = async (req, res) => {
     
 
     // Responde a la solicitud en tu controlador de aplicación
-    res.status(200).json({ mensaje: 'Solicitud POST enviada con éxito' });
+    if (response.data.mensaje === '¡Registro guardado correctamente!') {
+      res.redirect(302, '/');
+    } else {
+      res.status(200).json({ mensaje: response.data.mensaje });
+    }
   } catch (error) {
     console.error('Error al enviar la solicitud POST a la API:', error);
     res.status(500).json({ error: 'Error en la solicitud POST a la API' });
