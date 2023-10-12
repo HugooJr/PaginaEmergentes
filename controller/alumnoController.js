@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const axios = require('axios');
 module.exports.mostrar = (req, res)=>{
-    const clientIp = ip.address(); // Obtén la dirección IP del cliente 
+    const clientIp = req.ip(); // Obtén la dirección IP del cliente 
     
     res.render('index', {"clientIp":clientIp});
 }
