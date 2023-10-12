@@ -8,22 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
-    <title>FrasesRandom</title>
+    <title>iaAzurduy</title>
     <style>
-      body, html { height: 100%; width: 100%; margin: 0 0; display: flex; justify-content: center; align-items: center; }
-        
-        
-      #randomBox { padding: 20px; border-radius: 10px; text-align: center; margin-top:80px; background-color: wheat; }
+      body, html { height: 100%; margin: 0; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; }
+      #randomBox { padding: 20px; border-radius: 10px; text-align: center; }
       #titulo {
         padding: 20px; border-radius: 10px; text-align: center;
         position: absolute;
-        background-color: wheat;
+        color: #f0f0f0;
+        margin-top: -150px;
       }
       #buttons {
         padding: 20px; border-radius: 10px; text-align: center;
         position: absolute;
-        margin-top: 0px;
-        margin-left: -20px;
+        margin-top: 150px;
       }
     </style>
     </head>
@@ -34,7 +32,7 @@
       <div id="randomBox" name="frase"></div>
       <input type="text" name="ip" style="display: none;" value="<%= clientIp %>"/>
       <input type="text" name="frase" id="frase" style="display: none;"/>
-      <input type="text" name="colorfondo" id="colorfondo" style="display: none;"/>
+      <input type="text" name="colorFondo" id="colorFondo" style="display: none;"/>
       <input type="text"  name="colorLetra" id="colorLetra" style="display: none;"/>
       
       <div id="buttons">
@@ -49,7 +47,6 @@
     
     
     <script>
-
       function clicks(){
         // Obtén el botón y el elemento donde mostrar el contador
         const boton = document.getElementById('boton');
@@ -67,9 +64,9 @@
       function getRandomColor() {
         const colores = ["#F43545", "#FA8901", "#FAD717", "#00BA71", "#00C2DE", "#00418D", "#5F2879"];
         let colorAleatorio;
-        
+        do {
           colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-        
+        } while (colorAleatorio === document.body.style.backgroundColor);
         return colorAleatorio;
       }
     
@@ -130,20 +127,17 @@
       const color = getRandomColor();
       const backColor = getRandomColor();
       const randomBox = document.getElementById('randomBox');
-      //randomBox.style.backgroundColor = getRandomColor();
+      randomBox.style.backgroundColor = backColor;
       randomBox.innerText = getRandomPhrase();
       randomBox.style.color = color;
 
-      const body = document.body;
-      body.style.backgroundColor = getRandomColor();
-
       const titulo = document.getElementById('titulo');
-      //titulo.style.backgroundColor = getRandomColor();
+      titulo.style.backgroundColor = backColor;
       titulo.style.color = color;
 
       document.getElementById("frase").value = randomBox.innerText;
-      document.getElementById("colorfondo").value = body.style.backgroundColor;
-      document.getElementById("colorLetra").value = titulo.style.color;
+      document.getElementById("colorFondo").value = randomBox.style.backgroundColor;
+      document.getElementById("colorLetra").value = randomBox.style.color;
       
     </script>
     </body>
