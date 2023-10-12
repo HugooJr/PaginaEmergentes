@@ -8,59 +8,48 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
-    <title>iaAzurduy</title>
+    <title>FrasesRandom</title>
     <style>
-      body, html { 
-        height: 100%; 
-        width: 100%; 
-        margin: 0 0;
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        background-color: #f0f0f0; 
-      }
-      #randomBox { 
-        padding: 20px; 
-        border-radius: 10px; 
-        text-align: center; 
-        font-size: px;
-      }
+      body, html { height: 100%; width: 100%; margin: 0 0; display: flex; justify-content: center; align-items: center; }
+        
+        
+      #randomBox { padding: 20px; border-radius: 10px; text-align: center; margin-top:80px; background-color: wheat; }
       #titulo {
-        padding: 20px;
-        font-family: Century Gothic;
-        border-radius: 10px; 
-        text-align: center;
-        margin-top: -150px;
-        margin-bottom: 15px;
-        font-size: 30px;
+        padding: 20px; border-radius: 10px; text-align: center;
+        position: absolute;
+        background-color: wheat;
       }
       #buttons {
-        padding: 20px; 
-        border-radius: 20px; 
-        text-align: center;
-        margin-top: 10px;
-        font-family: Century Gothic;
+        padding: 20px; border-radius: 10px; text-align: center;
+        position: absolute;
+        margin-top: 0px;
+        margin-left: -20px;
       }
     </style>
     </head>
     <body>
     
     <form action="/enviar" method="post">
-      <b><div id="titulo">Frases Iconicas</div></b>
-      <b><div id="randomBox" name="frase"></div></b>
+      <div id="titulo">Frases celebres</div>
+      <div id="randomBox" name="frase"></div>
       <input type="text" name="ip" style="display: none;" value="<%= clientIp %>"/>
       <input type="text" name="frase" id="frase" style="display: none;"/>
-      <input type="text" name="colorFondo" id="colorFondo" style="display: none;"/>
+      <input type="text" name="colorfondo" id="colorfondo" style="display: none;"/>
       <input type="text"  name="colorLetra" id="colorLetra" style="display: none;"/>
       
       <div id="buttons">
-        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true">  Me gusta</i></button>
-        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco"><i class="fas fa-solid fa-poo" aria-hidden="true">  No me gusta</i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-warning px-3" style="color: white; background-color: red;" value="Me encanta"><i class="fas fa-heart" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-success px-3" value="Me divierte"><i class="bi bi-emoji-laughing-fill" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-info px-3" style="color: white; background-color:deeppink" value="Me sorprende"><i class="bi bi-emoji-dizzy-fill" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-warning px-3" style="color: white;background-color:darkblue;" value="Me entristece"><i class="bi bi-emoji-frown-fill"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" style="background-color: brown;" value="Me da asco"><i class="fas fa-solid fa-poo" aria-hidden="true"></i></button>
       </div>
     </form>
     
     
     <script>
+
       function clicks(){
         // Obtén el botón y el elemento donde mostrar el contador
         const boton = document.getElementById('boton');
@@ -78,9 +67,9 @@
       function getRandomColor() {
         const colores = ["#F43545", "#FA8901", "#FAD717", "#00BA71", "#00C2DE", "#00418D", "#5F2879"];
         let colorAleatorio;
-        do {
+        
           colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-        } while (colorAleatorio === document.body.style.backgroundColor);
+        
         return colorAleatorio;
       }
     
@@ -138,23 +127,23 @@
         ];
         return phrases[Math.floor(Math.random() * phrases.length)];
       }
-
       const color = getRandomColor();
       const backColor = getRandomColor();
       const randomBox = document.getElementById('randomBox');
-      //randomBox.style.backgroundColor = backColor;
+      //randomBox.style.backgroundColor = getRandomColor();
       randomBox.innerText = getRandomPhrase();
       randomBox.style.color = color;
 
-      document.body.style.backgroundColor = getRandomColor();
+      const body = document.body;
+      body.style.backgroundColor = getRandomColor();
 
       const titulo = document.getElementById('titulo');
-      //titulo.style.backgroundColor = backColor;
+      //titulo.style.backgroundColor = getRandomColor();
       titulo.style.color = color;
 
       document.getElementById("frase").value = randomBox.innerText;
-      document.getElementById("colorFondo").value = document.body.style.backgroundColor;
-      document.getElementById("colorLetra").value = randomBox.style.color;
+      document.getElementById("colorfondo").value = body.style.backgroundColor;
+      document.getElementById("colorLetra").value = titulo.style.color;
       
     </script>
     </body>
