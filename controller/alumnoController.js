@@ -1,14 +1,13 @@
 const fetch = require('node-fetch');
 const axios = require('axios');
-module.exports.mostrar = (req, res)=>{
-    const clientIp = req.ip(); // Obtén la dirección IP del cliente 
-    
-    res.render('index', {"clientIp":clientIp});
-}
+const ip = require('ip');
 
+module.exports.mostrar = (req, res) => {
+  const ip = require('ip');
+  const clientIp = ip.address(); // Obtén la dirección IP privada del cliente
+  res.render('index', { "clientIp": clientIp });
+};
 
-
-// Función para enviar los datos al servidor de la API
 exports.enviar = async (req, res) => {
   try {
     // Obtén los valores de los campos del formulario
@@ -26,12 +25,8 @@ exports.enviar = async (req, res) => {
       colorLetra,
       ip
     };
-
     // Realiza una solicitud POST a la API con los datos
     const response = await axios.post('https://api-2g00.onrender.com/crear', datos);
-
-    // Maneja la respuesta de la API como desees
-    
 
     // Responde a la solicitud en tu controlador de aplicación
     if (response.data.mensaje === '¡Registro guardado correctamente!') {
