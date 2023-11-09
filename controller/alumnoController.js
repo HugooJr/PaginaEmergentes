@@ -16,11 +16,6 @@ module.exports.crear = (req, res)=>{
         edad: req.body.edad
     })
     alumno.save(function(error,alumno){
-        if(error){
-            return res.status(500).json({
-                message: 'Error al crear el Alumno'
-            })
-        }
         res.redirect('/')
     })
 }
