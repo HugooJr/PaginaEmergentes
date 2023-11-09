@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const Alumno = require('../model/Alumnos')
 
 module.exports.mostrar = (req, res) => {
