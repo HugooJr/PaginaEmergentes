@@ -8,54 +8,48 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
-    <title>f</title>
+    <title>Frases cineastas</title>
     <style>
-      body, html { 
-        height: 100%; 
-        width: 100%; 
-        margin: 0 0;
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        background-color: #f0f0f0; 
-      }
-      #randomBox { 
-        padding: 20px; 
-        border-radius: 10px; 
-        text-align: center; 
-        font-size: px;
-      }
-      #titulo {
-        padding: 20px;
-        font-family: Century Gothic;
-        border-radius: 10px; 
-        text-align: center;
-        margin-top: -150px;
-        margin-bottom: 15px;
-        font-size: 30px;
-      }
-      #buttons {
-        padding: 20px; 
-        border-radius: 20px; 
-        text-align: center;
-        margin-top: 10px;
-        font-family: Century Gothic;
-      }
+      body, html { height: 100%; width: 100%; margin: 0 0; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; }
+        #randomBox { padding: 20px; border-radius: 10px; text-align: center; }
+        #titulo {
+          padding: 20px; border-radius: 10px; text-align: center;
+          position: absolute;
+          margin-top: -75px;
+        }
+        #sexo {
+          width: 150px;
+        }
+        #buttons {
+          padding: 20px; border-radius: 10px; text-align: center;
+          position: absolute;
+        }
     </style>
     </head>
     <body>
     
-    <form action="/enviar" method="post">
-      <b><div id="titulo">Frases Iconicas</div></b>
-      <b><div id="randomBox" name="frase"></div></b>
-      <input type="text" name="ip" style="display: none;" value="<%= clientIp %>"/>
+    <form action="/crear" method="POST">
+      <div id="titulo">Frases celebres</div>
+      <div id="randomBox"></div>
       <input type="text" name="frase" id="frase" style="display: none;"/>
-      <input type="text" name="colorFondo" id="colorFondo" style="display: none;"/>
-      <input type="text"  name="colorLetra" id="colorLetra" style="display: none;"/>
+      <input type="text" name="colorFondo1" id="colorFondo1" style="display: none;"/>
+      <input type="text"  name="colorFondo2" id="colorFondo2" style="display: none;"/>
+      <label>Edad:</label>
+      <select id="edad" name="edad" required class="form-select" aria-label="Disabled select example">
+        <option value="">Seleccionar</option>
+        <option value="0 - 14">0 - 14</option>
+        <option value="15 - 30">15 - 30</option>
+        <option value="30 o mas">30 o mas</option>
+        <!-- Agrega más opciones según sea necesario -->
+      </select>
       
       <div id="buttons">
-        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true">  Me gusta</i></button>
-        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco"><i class="fas fa-solid fa-poo" aria-hidden="true">  No me gusta</i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-default px-3" value="Me encanta"><i class="fas fa-heart" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-success px-3" value="Me divierte"><i class="bi bi-emoji-laughing-fill" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-info px-3" value="Me sorprende"><i class="bi bi-emoji-dizzy-fill" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-warning px-3" value="Me entristece"><i class="bi bi-emoji-frown-fill"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco"><i class="fas fa-solid fa-poo" aria-hidden="true"></i></button>
       </div>
     </form>
     
@@ -86,108 +80,72 @@
     
       function getRandomPhrase() {
         const phrases = [
-    "¿Por qué los estadounidenses son malos jugadores de ajedrez? Porque perdieron dos torres.",
-    "¿Qué hace una mujer fuera de la cocina? -Turismo ",
-    "A mis parientes mayores les gustaba burlarse de mí en las bodas, diciendo: ¡Tú serás el siguiente!. Pero dejaron de hacerlo enseguida cuando empecé a hacer lo mismo yo en los funerales.",
-    "El médico en la consulta. 'Tengo buenas y malas noticias'. 'Deme primero las buenas', dice el paciente. 'Han llegado los resultados de sus pruebas y solo le quedan dos días de vida'. '¿Esas son las buenas noticias? ¿Y cuál es la mala?', dice el paciente. 'Llevo dos días intentando localizarle'.",
-    "¿Qué es peor que seis niños colgados de un árbol? Un niño colgado de seis árboles",
-    "Somos suficientes en este planeta como para empezar a disminuir un poco la manada. No estoy diciendo que debamos cazar a los estúpidos. Digo que dejemos que se suiciden. Quitemos algunas advertencias. Quitemos el 'no ingerir' de los botes de pintura. ¡Cómetela! ¿Quieres comerla? ¡Cómetela! Dale de comer a tus hijos tontos también. Nosotros tampoco los queremos.",
-    "Mi novia, hablando de astronomía, me preguntó cómo mueren las estrellas. 'Normalmente por sobredosis', le dije.",
-    "La vida es una mierda, cuando la miras. La vida es una risa y la muerte es una broma, es verdad. Verás que todo es un espectáculo. Haz que se rían a tu paso. Tan solo recuerda que la última risa es a tu costa",
-    "Nunca le rompas el corazón a alguien, solo tienen uno. Rómpele los huesos mejor, tienen 206.",
-    "Yo... solía tener un hijo. Solía tener un hijo de dos años, pero murió. De la misma manera que murió el hijo de Eric Clapton. Para conseguir inspiración. (...) Es un chiste complicado, hay que saber muchas cosas. Este chiste es como una cebolla. Tienes que saber quién es Eric Clapton. No es algo garantizado a día de hoy. Tienes que saber sobre su hijo. Tienes que saber lo torpe que era ese muchacho. Tienes que conocer esa maldita canción. Y luego tienes que pensar que todo esto es gracioso",
-    "Dos cazadores están en el bosque cuando uno de ellos se desmaya. Su compañero llama inmediatamente a emergencias. 'Mi amigo no respira', grita al teléfono. '¿Qué debo hacer?'. 'Tranquilo', le dice el operador. 'Puedo ayudarle. Primero, asegurémonos de que está muerto'. Se hace el silencio y luego suena un disparo. El tipo vuelve a coger el teléfono y dice: 'Vale, ¿y ahora qué?'",
-    "El otro día estaba en el parque una madre se sentó a mi lado. Después de un rato, se inclinó y preguntó: '¿Cuál es el tuyo?'. La miré y le dije: 'Todavía no lo he decidido'.",
-    "Quiero morir tranquilamente mientras duermo, como mi abuelo. No gritando, como los pasajeros de su autobús.",
-    "Si alguna vez viera que ahorcan a un amputado, me pondría a gritarle letras",
-    "Los chistes de humor negro son como los niños de los antivacunas, nunca se hacen viejos",
-    "Su humor era tan negro que le disparaba la policía",
-    "El dentista al paciente: 'Esto le va a doler un poco'. 'Vale', contesta este. Y el dentista añade: 'Me estoy tirando a su mujer'",
-    "El humor negro es como los esclavos, hoy en día muy pocos tenemos uno",
-    "Incluso la gente que no sirve para nada tiene la capacidad de sacarte una sonrisa. Por ejemplo, cuando los empujas por las escaleras",
-    "Si donas un riñón, todo el mundo te quiere y eres un héroe. Pero dona cinco y de repente todo el mundo se pone a gritar",
-    "Un hombre va a la biblioteca y pide un libro sobre cómo suicidarse. El bibliotecario le responde, 'no te lo presto, que no me lo devuelves'",
-    "Nunca olvidaré las últimas palabras de mi abuelo justo antes de morir. '¿Sigues sosteniendo la escalera?'",
-    "¿Qué tienen en común Miguel Ángel y Kurt Cobain? Que los dos usaros sus cerebros para pintar el techo",
-    "El secreto para que una chica caiga rendida a tus pies es regalarle flores. Ayuda que las flores huelan mucho a cloroformo",
-    "En un avión el piloto anuncia por megafonía que el avión se va a estrellar y que no queda ninguna esperanza de salvarse. Entonces una pasajera del vuelo se pone en pie y grita: '¿Hay alguien aquí lo suficientemente hombre para hacerme sentir mujer una última vez?'. Entonces un tipo se levanta, se arranca la camiseta y le dice: 'Toma, plancha esto'",
-    "¿Qué tienen en común el tofu y un consolador? Ambos son sustitutos de la carne",
-    "Estaba cavando un hoyo en nuestro jardín y encontré un cofre lleno de monedas de oro. Quería ir corriendo a casa a contárselo a mi marido. Entonces recordé por qué estaba cavando un hoyo en nuestro jardín",
-    "¿Qué tiene mi padre en común con Nemo? No se puede encontrar a ninguno de los dos",
-    "Mi mayor héroe es Nelson Mandela. Qué hombre. Encarcelado durante 25 años, fue liberado en 1990 y no ha reincidido. Creo que se está enderezando, lo que demuestra que la cárcel sí funciona",
-    "He visitado a mi amigo en su nuevo apartamento. Me dijo que me sintiera como en casa. Así que le eché. Odio tener visitas",
-    "No necesitas un paracaídas para hacer paracaidismo. Necesitas un paracaídas para hacer paracaidismo dos veces",
-    "¿Recuerdas cuando eras joven y pensabas que tu padre era Superman? Y luego creces y te das cuenta de que sólo es un borracho que lleva una capa",
-    "El perro de mi novia se murió, así que le compré otro idéntico. Ella me gritó y me dijo: '¿Qué voy a hacer con dos perros muertos?'",
-    "¿Conoces la frase 'la basura de un hombre es el tesoro de otro'? Maravilloso dicho, horrible manera de descubrir que fuiste adoptado",
-    "Un hombre va al médico para un chequeo, y este le dice: 'Tengo malas noticias, usted tiene cáncer y alzheimer'. El hombre le responde: '¡Gracias a Dios que no tengo cáncer!'",
-    "Si tuviera diez centavos por cada vez que un indigente me ha pedido dinero, seguiría diciendo que no",
-    "Mi terapeuta acaba de morir. Era tan bueno que ni siquiera me importa",
-    "Hoy le he preguntado a mi teléfono: 'Siri, ¿por qué sigo soltero?'. Y ha activado la cámara frontal",
-    "A medida que me hago mayor, me acuerdo de toda la gente que he perdido por el camino. Quizá mi carrera de guía turístico no fue la elección correcta",
-    "¿Quieres saber cómo convertir cualquier ensalada en una ensalada César? Apuñálala veintitrés veces",
-////////chistes buenos
-    "¿Por qué llora un libro de matemáticas? ¡Porque tiene muchos problemas!",
-    "¿Qué está al final de todo? ¡La letra o!",
-    "¿Por qué el profe de música tiene una escalera? ¡Para poder llegar a las notas más altas!",
-    "¿Cuál es el baile favorito del tomate? ¡La salsa!",
-    "¿Qué le dice un pez a otro? ¡Nada!",
-    "¿Cuál es el colmo de un futbolista? ¡Que le hagan la pelota!",
-    "¿Tienen libros sobre el cansancio? Sí, pero ahora mismo no hay, ¡están todos agotados!",
-    "¿Qué le dice un gusano a otro? Me voy a dar la vuelta a la manzana.",
-    "¿Qué le dice una iguana a su hermana gemela? Somos iguanitas",
-    "¿Cuál es el colmo del electricista? ¡Que su mujer se llame Luz!",
-    "¿Cómo se dice pañuelo en japonés? Sacamoko",
-    "¿Cuál es el colmo de un farmacéutico? ¡Que su mujer se llame Remedios!",
-    "Profesora, ¿qué quiere decir 'why'? ¿Por qué? Por saberlo",
-    "Un hombre entra en un bar de pinchos y dice:¡¡Ayyyyy!!",
-    "¿Cuál es la fruta más divertida? ¡La naranjajajajaja!",
-    "¿Cuál es el pez que huele mucho? ¡Peztoso!",
-    "Papá, ¿hay gelatina? Pues que yo sepa nada más que existe la 'i latina' y la 'y griega'.",
-    "Pedro, ¿qué harías tú si te estuvieras ahogando en alta mar? ¡Llorar para desahogarme!",
-    "¿Qué le dice un semáforo a otro? ¡No me mires que me estoy cambiando!",
-    "¿Qué le dice una pared a otra? ¡Nos vemos en la esquina!",
-    "¿Sabes cómo se queda un mago después de comer? Magordito",
-    "Papá, ¿cómo se dice perro en inglés? Dog. ¿Y veterinario? Pues Dog-tor.",
-    "¿Qué le dijo una pulga a otra pulga? ¿Vamos a pie o esperamos al perro?",
-    "Alberto, ¿qué planeta va después de Marte? Miércoles",
-    "Pepe, si en esta mano tengo 8 naranjas y en esta otra 6 naranjas. ¿Qué tengo? ¡Unas manos enormes, profe!",
-    "¡Mamá, he sacado un 10! ¿En serio? ¿En qué materias? Un 3 en matemáticas, un 2 en sociales, un 3 en inglés y un 2 en geografía.",
-    "La M con la A suena MA, ¿y si le pones una tilde? ¡Matilde!",
-    "¿Cuál es la montaña más limpia? El volcán. Porque primero echa cenizas y después, lava",
-    "¿Qué le dice un pollito a su enemigo? ¡Caldito seas!",
-    "¿Cómo se dice guardia civil en holandés? Vandeverde",
-    "Érase una vez un chiste tan malo tan malo que pegaba a los otros chistes",
-    "¿Por qué las vacas viajan a Nueva York? Para ver los muuuusicales.",
-    "¿Está Agustín? No, estoy incomodín",
-    "¿De dónde vienen los hamster? De Hamsterdam",
-    "Doctor, tengo todo el cuerpo cubierto de pelo. ¿Qué padezco? Padece uzted un ozito.",
-    "Había una vez un hombre tan pequeño tan pequeño que se subió encima de una canica y dijo:¡El mundo es mío!",
-    "¿Cuál es el colmo de un peluquero? ¡Perder el autobús por los pelos!",
-    "¡Qué estrés! Dos más uno.",
-    "¿Cuál es el colmo de un libro? ¡Que en otoño se le caigan las hojas!",
-    "¿Sabes que mi hermano anda en bicicleta desde los cinco años? ¿Ah sí? ¡Qué lejos debe de estar ya!",
+    "Sólo hay una persona que puede decidir lo que voy a hacer, y soy yo mismo.",
+        "Descubre quién eres y hazlo a propósito.",
+        "Sólo los soñadores mueven montañas.",
+        "La muerte nos sonríe a todos, devolvámosle la sonrisa.",
+        "Oh, sí... El pasado puede doler, pero tal como yo lo veo puedes huir de él o aprender.",
+        "Prefiero ser un optimista loco antes que un pesimista sensato.",
+        "Las causas perdidas son las únicas por las que vale la pena luchar.",
+        "Nací cuando ella me besó, morí el día que me abandonó, y viví el tiempo que me amó.",
+        "Llamar a alguien gorda no te hace estar más delgada, llamar a alguien estúpida no te hace más lista y arruinarle la vida a Regina George no me hizo más feliz, todo lo que puedes hacer en la vida es intentar resolver el problema que tienes delante.",
+        "Nuestro amor es como el viento, no puedo verlo pero si sentirlo.",
+        "Pensamos demasiado y sentimos muy poco…",
+        "Enterramos nuestros pecados, lavamos nuestras conciencias.",
+        "El odio me llevó a la cárcel, el amor me dará la libertad.",
+        "No quiero necesitarte… porque no puedo tenerte.",
+        "Sólo tú puedes decidir qué hacer con el tiempo que se te ha dado.",
+        "¿Porque la gente buena elige salir con personas equivocadas? Porque aceptamos el amor que creemos merecer. ¿Se les puede hacer notar que merecen más? Podemos intentar.",
+        "Mi conclusión es que el odio es un lastre. La vida es demasiado corta para estar siempre cabreado.",
+        "Los finales felices son historias sin acabar.",
+        "Nunca dejes que nadie te diga que no puedes hacer algo. Ni siquiera yo. Si tienes un sueño, tienes que protegerlo. Las personas que no son capaces de hacer algo por ellos mismos, te dirán que tú tampoco puedes hacerlo. ¿Quieres algo? Ve por ello y punto.",
+        "No me acuerdo de olvidarte",
+        "Todos los hombres mueren, pero no todos han vivido.",
+        "Amar significa no tener que decir nunca lo siento.",
+        "Las ilusiones pueden ser muy poderosas.",
+        "El mejor amigo de un chico es su madre.",
+        "Me haces querer ser un hombre mejor.",
+        "Hazlo o no lo hagas, pero no lo intentes.",
+        "Podrán quitarnos la vida, pero nunca podrán arrebatarnos la libertad.",
+        "¿De qué sirve confesarme si no me arrepiento?",
+        "Cada minuto que pasa es otra oportunidad de seguir cambiando.",
+        "Todos esos momentos se perderán en el tiempo como lágrimas en la lluvia.",
+        "Mantén cerca a tus amigos, pero más cerca a tus enemigos.",
+        "Con cada combate te haces más fuerte.",
+        "Ahora puedo decirte que tomé la decisión correcta, sin embargo, no hay un día que pase sin arrepentirme de no haber tomado una opción diferente.",
+        "No hay dos palabras que sean más dañinas en nuestro idioma que ‘buen trabajo’.",
+        "Dices que quieres morir por amor, pero no sabes nada de la muerte, ni sabes nada del amor.",
+        "No existen preguntas sin respuesta, solo preguntas mal formuladas.",
+        "Yo no digo mentiras, le doy amplitud a la verdad.",
+        "No son las habilidades lo que demuestra lo que somos, son nuestras decisiones.",
+        "Hay tres maneras de hacer las cosas: la correcta, la incorrecta y la mía.",
+        "Una vida que niega la libertad, no es vida.",
+        "Sin ti las emociones de hoy sólo serían las envolturas muertas de las del ayer.",
+        "Es toda una experiencia vivir con miedo, ¿verdad? Eso es lo que significa ser un esclavo.",
+        "He cruzado océanos de tiempo para encontrarte.",
+        "Todo el mundo quiere ser libre, pero una cosa es hablar de ello y otra muy diferente es serlo.",
+        "La vida es un regalo y no pienso desperdiciarla. Nunca se sabe qué cartas repartirá la próxima vez.",
+        "Todos morimos, lo que importa es el cómo y el cuándo.",
+        "Muéstrame un corazón que esté libre de necios sueños, y te enseñaré a un hombre feliz.",
+        "El momento más feliz del día es acompañarte a casa. Es el momento más triste del día cuando te dejo.",
+        "Con cada combate te haces más fuerte."
 ];
         return phrases[Math.floor(Math.random() * phrases.length)];
       }
-
-      const color = getRandomColor();
-      const backColor = getRandomColor();
+      const coloFondo1 = getRandomColor();
       const randomBox = document.getElementById('randomBox');
-      //randomBox.style.backgroundColor = backColor;
+      randomBox.style.backgroundColor = coloFondo1;
       randomBox.innerText = getRandomPhrase();
-      randomBox.style.color = color;
-
       document.body.style.backgroundColor = getRandomColor();
 
       const titulo = document.getElementById('titulo');
-      //titulo.style.backgroundColor = backColor;
-      titulo.style.color = color;
+      titulo.style.backgroundColor = coloFondo1;
 
       document.getElementById("frase").value = randomBox.innerText;
-      document.getElementById("colorFondo").value = document.body.style.backgroundColor;
-      document.getElementById("colorLetra").value = randomBox.style.color;
+      document.getElementById("colorFondo1").value = randomBox.style.backgroundColor;
+      document.getElementById("colorFondo2").value = randomBox.style.backgroundColor;
       
     </script>
+    <script src="js/code.js"></script>
     </body>
 </html>
