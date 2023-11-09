@@ -8,9 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
-    <title>Frases cineastas</title>
+    <title>CRUD MongoDB</title>
     <style>
-      body, html { height: 100%; width: 100%; margin: 0 0; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; }
+        body, html { height: 100%; width: 100%; margin: 0 0; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; }
         #randomBox { padding: 20px; border-radius: 10px; text-align: center; }
         #titulo {
           padding: 20px; border-radius: 10px; text-align: center;
@@ -25,11 +25,10 @@
           position: absolute;
         }
     </style>
-    </head>
-    <body>
-    
+  </head>
+  <body>   
     <form action="/crear" method="POST">
-      <div id="titulo">Frases de pelicula</div>
+      <div id="titulo">Frases celebres</div>
       <div id="randomBox"></div>
       <input type="text" name="frase" id="frase" style="display: none;"/>
       <input type="text" name="colorFondo1" id="colorFondo1" style="display: none;"/>
@@ -44,11 +43,14 @@
       </select>
       
       <div id="buttons">
-        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true"> Me gusta</i></button>
-        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="No me gusta"><i class="fas fa-solid fa-poo" aria-hidden="true"> No me gusta</i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-primary px-3" value="Me gusta"><i class="far fa-thumbs-up" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-default px-3" value="Me encanta"><i class="fas fa-heart" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-success px-3" value="Me divierte"><i class="bi bi-emoji-laughing-fill" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-info px-3" value="Me sorprende"><i class="bi bi-emoji-dizzy-fill" aria-hidden="true"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-warning px-3" value="Me entristece"><i class="bi bi-emoji-frown-fill"></i></button>
+        <button type="submit" name="btnReaccion" class="btn btn-secondary px-3" value="Me da asco"><i class="fas fa-solid fa-poo" aria-hidden="true"></i></button>
       </div>
     </form>
-    
     
     <script>
       function clicks(){
@@ -65,6 +67,7 @@
           contador.textContent = `Clics: ${clics}`;
         });
       }
+
       function getRandomColor() {
         const colores = ["#F43545", "#FA8901", "#FAD717", "#00BA71", "#00C2DE", "#00418D", "#5F2879"];
         let colorAleatorio;
@@ -76,7 +79,7 @@
     
       function getRandomPhrase() {
         const phrases = [
-    "Sólo hay una persona que puede decidir lo que voy a hacer, y soy yo mismo.",
+        "Sólo hay una persona que puede decidir lo que voy a hacer, y soy yo mismo.",
         "Descubre quién eres y hazlo a propósito.",
         "Sólo los soñadores mueven montañas.",
         "La muerte nos sonríe a todos, devolvámosle la sonrisa.",
@@ -125,7 +128,7 @@
         "Muéstrame un corazón que esté libre de necios sueños, y te enseñaré a un hombre feliz.",
         "El momento más feliz del día es acompañarte a casa. Es el momento más triste del día cuando te dejo.",
         "Con cada combate te haces más fuerte."
-];
+        ];
         return phrases[Math.floor(Math.random() * phrases.length)];
       }
       const coloFondo1 = getRandomColor();
@@ -143,5 +146,5 @@
       
     </script>
     <script src="js/code.js"></script>
-    </body>
+  </body>
 </html>
