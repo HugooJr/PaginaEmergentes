@@ -1,4 +1,4 @@
-const Alumno = require('../model/Alumnos')
+const Alumno = require('../model/Alumnos');
 
 module.exports.mostrar = (req, res) => {
     res.render('index');
@@ -12,7 +12,8 @@ module.exports.crear = (req, res)=>{
         reaccion: req.body.btnReaccion,
         colorFondo1: req.body.colorFondo1,
         colorFondo2:req.body.colorFondo2,
-        edad: req.body.edad
+        edad: req.body.edad,
+        positivismo: reglas(req.body.frase, req.body.btnReaccion, req.body.colorFondo1, req.body.colorFondo2, req.body.edad)
     })
     alumno.save(function(error,alumno){
         if(error){
@@ -22,6 +23,109 @@ module.exports.crear = (req, res)=>{
         }
         res.redirect('/')
     })
+}
+
+function reglas(frase, reaccion, colorFondo1, colorFondo2, edad){
+    // Supongamos que 'frase' es la variable que contiene la frase que deseas clasificar
+    let positivismo, observacion;
+
+    if (
+        frase.includes("decidir") || frase.includes("soñadores") || frase.includes("optimista") ||
+        frase.includes("felices") || frase.includes("protegerlo") || frase.includes("libre") ||
+        frase.includes("cambiar") || frase.includes("fuerte") || frase.includes("correcta") ||
+        frase.includes("vida") || frase.includes("regalo") || frase.includes("morir") ||
+        frase.includes("feliz") || frase.includes("oportunidad") || frase.includes("quitar") ||
+        frase.includes("mejor") || frase.includes("hazlo") || frase.includes("intentar") ||
+        frase.includes("hombre") || frase.includes("libertad") || frase.includes("muerte") ||
+        frase.includes("sueños") || frase.includes("acompañarte") || frase.includes("triste") 
+    ) {
+        //console.log("La frase es positiva.");
+
+        switch (reaccion) {
+            case "Me gusta":
+                positivismo = true;
+            observacion = "La persona parece tener una actitud positiva y apreciativa. Podría ser percibida como alguien optimista y que valora las experiencias positivas.";
+            break;
+            
+            case "Me encanta":
+                positivismo = true;
+            observacion = "La persona muestra una reacción aún más positiva y entusiasta. Podría ser vista como alguien que se emociona fácilmente y encuentra gran placer en las experiencias positivas.";
+            break;
+            
+            case "Me divierte":
+                positivismo = true;
+            observacion = "La persona podría ser percibida como alguien con un sentido del humor y una actitud alegre. Disfruta de la diversión y el humor en la vida.";
+            break;
+        
+            case "Me sorprende":
+                positivismo = true;
+            observacion = "Indica que la persona encuentra las frases impactantes o inesperadas. Puede ser vista como alguien abierto a nuevas ideas y perspectivas, que aprecia la originalidad.";
+            break;
+        
+            case "Me entristece":
+                positivismo = false;
+            observacion = "La persona se conmueve emocionalmente por las frases que contienen sentimientos de tristeza o reflexión. Puede ser vista como alguien empático y sensible a las emociones.";
+            break;
+        
+            case "Me da asco":
+                positivismo = false;
+            observacion = "Sugiere una reacción negativa hacia las frases. La persona podría ser percibida como más crítica o menos receptiva a las ideas presentadas en las frases.";
+            break;
+        }
+
+    } else if (
+        frase.includes("muerte") || frase.includes("gorda") || frase.includes("estúpida") ||
+        frase.includes("cabreado") || frase.includes("odio") || frase.includes("confesarme") ||
+        frase.includes("arrepiento") || frase.includes("finales") || frase.includes("confesarme") ||
+        frase.includes("muertes") || frase.includes("dañinas") || frase.includes("muerte") ||
+        frase.includes("respuesta") || frase.includes("mentiras") || frase.includes("correcta") ||
+        frase.includes("vida") || frase.includes("buen trabajo") || frase.includes("morir") ||
+        frase.includes("confesarme") || frase.includes("repartirá") || frase.includes("morir") ||
+        frase.includes("sueños") || frase.includes("esclavo") || frase.includes("océanos") ||
+        frase.includes("triste") || frase.includes("fuerte") || frase.includes("correcta") ||
+        frase.includes("arrepentirme") || frase.includes("buen trabajo") || frase.includes("dañinas") ||
+        frase.includes("muerte") || frase.includes("respuesta") || frase.includes("amplitud") ||
+        frase.includes("habilidades") || frase.includes("decisiones") || frase.includes("correcta") ||
+        frase.includes("vida") || frase.includes("libertad") || frase.includes("emociones") ||
+        frase.includes("triste") || frase.includes("fuerte")
+    ) {
+        //console.log("La frase es negativa.");
+        // Supongamos que 'reaccion' es la variable que contiene la reacción, y 'frase' es la variable que contiene la frase
+
+        switch (reaccion) {
+        case 'Me gusta':
+            positivismo = false;
+            observacion = "La persona es comprensiva y puede apreciar la profundidad o la realidad de las declaraciones.";
+            break;
+
+        case 'Me encanta':
+            positivismo = false;
+            observacion = "La persona tiene una perspectiva positiva y puede estar enfocada en encontrar la belleza o el aprendizaje en situaciones desafiantes.";
+            break;
+
+        case 'Me divierte':
+            positivismo = false;
+            observacion = "La persona tiene un sentido del humor y puede encontrar ironía o sarcasmo en las declaraciones negativas.";
+            break;
+
+        case 'Me sorprende':
+            positivismo = false;
+            observacion = "La persona puede tener una reacción de asombro o incredulidad ante las declaraciones negativas.";
+            break;
+
+        case 'Me entristece':
+            positivismo = true;
+            observacion = "La persona muestra empatía y sensibilidad hacia las emociones negativas expresadas en las frases.";
+            break;
+
+        case 'Me da asco':
+            positivismo = true;
+            observacion = "La persona puede tener una reacción negativa directa a las declaraciones y puede ser vista como alguien que prefiere evitar o no apreciar contenido emocionalmente cargado o negativo.";
+            break;
+        }
+    }
+  
+    return (positivismo);
 }
 
 module.exports.editar = (req,res)=>{
