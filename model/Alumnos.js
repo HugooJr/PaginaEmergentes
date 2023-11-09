@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 const alumnoSchema = new Schema ({
     frase: String,
     reaccion:String,
-    fecha:String,
-    semestre:Number,
+    colorFondo1:String,
+    colorFondo2:String,
+    edad:String,
 }, {versionKey:false})
-module.exports = mongoose.model('alumnos', alumnoSchema)
+module.exports = mongoose.model('datos', alumnoSchema)
