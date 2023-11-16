@@ -8,5 +8,9 @@ const alumnoSchema = new Schema ({
     colorFondo2:String,
     edad:String,
     positivismo: Boolean,
+    clientIp: String,
+    pais: String,
+    ciudad: String,
+    personalidad: String
 }, {versionKey:false})
 module.exports = mongoose.model('alumnos', alumnoSchema)
