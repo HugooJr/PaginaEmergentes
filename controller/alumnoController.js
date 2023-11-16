@@ -73,7 +73,6 @@ function tercerColor(color1, color2, color3){
     Vi = parseInt(colorBody);
     Vm = parseInt(colorContenedor);
     const mitadExtremos = (Vi + Vf) / 2;
-    console.log(Vi + " " + Vm + " " + Vf);
     // Determinar si el tercer número está más inclinado hacia el extremo izquierdo o derecho
     if (Vm < mitadExtremos) {
         resultado = color1;
@@ -82,7 +81,6 @@ function tercerColor(color1, color2, color3){
     } else {
         resultado = color2;
     }
-    console.log(resultado);
     switch(resultado){
         case ("rgb(148, 0, 211)"):
             personalidad = "Realista, buen razonamiento y pensamiento práctico"
