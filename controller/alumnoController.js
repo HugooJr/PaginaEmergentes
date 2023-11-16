@@ -1,19 +1,41 @@
 const Alumno = require('../model/Alumnos');
 
+let ip = "";
+let country = "";
+let city = "";
+
+fetch("https://api.ipify.org?format=json")
+  .then(response => response.json())
+  .then(data => {
+    const ipAddress = data.ip;
+
+    // Llama a ipinfo.io para obtener información de geolocalización basada en la IP
+    return fetch(`https://ipinfo.io/${ipAddress}?token=9f8e12d2c430aa`);
+  })
+  .then(response => response.json())
+  .then(geoData => {
+    country = geoData.country;
+    city = geoData.city;
+  })
+  .catch(error => console.error(error));
+
 module.exports.mostrar = (req, res) => {
     res.render('index');
 };
 
 module.exports.crear = (req, res)=>{
-    
     //console.log(req.body)
     const alumno = new Alumno({
         frase: req.body.frase,
         reaccion: req.body.btnReaccion,
         colorFondo1: req.body.colorFondo1,
-        colorFondo2:req.body.colorFondo2,
+        colorFondo2: req.body.colorFondo2,
         edad: req.body.edad,
-        positivismo: reglas(req.body.frase, req.body.btnReaccion, req.body.colorFondo1, req.body.colorFondo2, req.body.edad)
+        positivismo: reglas(req.body.frase, req.body.btnReaccion),
+        clientIp: ip,
+        pais: country,
+        ciudad: city,
+        personalidad: tercerColor(req.body.colorFondo1, req.body.colorFondo2, req.body.color3)
     })
     alumno.save(function(error,alumno){
         if(error){
@@ -25,7 +47,73 @@ module.exports.crear = (req, res)=>{
     })
 }
 
-function reglas(frase, reaccion, colorFondo1, colorFondo2, edad){
+function sacarRgb(color){
+    const rgbArray = color.match(/\d+/g);
+    // Asignar los componentes a variables separadas
+    const red = parseInt(rgbArray[0]);
+    const green = parseInt(rgbArray[1]);
+    const blue = parseInt(rgbArray[2]);
+    const sumaRgb = red + green + blue;
+    const total = sumaRgb / 3;
+    return total;
+  }
+
+function tercerColor(color1, color2, color3){
+    let personalidad = "";
+    // obtener Datos
+    const colorBody = sacarRgb(color1);
+    const colorTexto = sacarRgb(color3);
+    const colorContenedor = sacarRgb(color2);
+    // variables formula Cuzzi
+    var resultado = "";
+    var Vi = 0;
+    var Vf = 0;
+    var Vm = 0;
+    Vf = parseInt(colorTexto);
+    Vi = parseInt(colorBody);
+    Vm = parseInt(colorContenedor);
+    const mitadExtremos = (Vi + Vf) / 2;
+    console.log(Vi + " " + Vm + " " + Vf);
+    // Determinar si el tercer número está más inclinado hacia el extremo izquierdo o derecho
+    if (Vm < mitadExtremos) {
+        resultado = color1;
+    } else if (Vm > mitadExtremos) {
+        resultado = color3;
+    } else {
+        resultado = color2;
+    }
+    console.log(resultado);
+    switch(resultado){
+        case ("rgb(148, 0, 211)"):
+            personalidad = "Realista, buen razonamiento y pensamiento práctico"
+            break;
+        case ("rgb(75, 0, 130)"):
+            personalidad = "Valiosa y conservada"
+            break;
+        case ("rgb(0, 0, 255)"):
+            personalidad = "Depresiva"
+            break;
+        case ("rgb(0, 255, 0)"):
+            personalidad = "Introvertido y tranquilo"
+            break;    
+        case ("rgb(255, 255, 0)"):
+            personalidad = "Alta autoestima"
+            break;    
+        case ("rgb(255, 127, 0)"):
+            personalidad = "Extrovertido y vivaz"
+            break;    
+        case ("rgb(255, 0, 0)"):
+            personalidad = "Agresiva y dominante"
+            break;    
+        default:
+            personalidad = "Neutra"
+            break;
+    }
+    // Extraer los componentes RGB
+    return personalidad;
+}
+
+function reglas(frase, reaccion){
     // Supongamos que 'frase' es la variable que contiene la frase que deseas clasificar
     let positivismo, observacion;
 
