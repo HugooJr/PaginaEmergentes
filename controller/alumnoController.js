@@ -8,7 +8,7 @@ fetch("https://api.ipify.org?format=json")
   .then(response => response.json())
   .then(data => {
     const ipAddress = data.ip;
-
+    ip = ipAddres;
     // Llama a ipinfo.io para obtener información de geolocalización basada en la IP
     return fetch(`https://ipinfo.io/${ipAddress}?token=9f8e12d2c430aa`);
   })
