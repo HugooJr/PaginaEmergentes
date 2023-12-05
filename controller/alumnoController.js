@@ -18,7 +18,8 @@ module.exports.crear = (req, res)=>{
         edad: req.body.edad,
         positivismo: reglas(req.body.frase, req.body.btnReaccion),
         clientIp: ip,
-        personalidad: tercerColor(req.body.colorFondo1, req.body.colorFondo2, req.body.color3)
+        personalidad: tercerColor(req.body.colorFondo1, req.body.colorFondo2, req.body.color3),
+        fecha: fechaCreacion();
     })
     alumno.save(function(error,alumno){
         if(error){
@@ -28,6 +29,16 @@ module.exports.crear = (req, res)=>{
         }
         res.redirect('/')
     })
+}
+function fechaCreacion(){
+    const fechaInicio = new Date("2023-10-13T00:00:00Z");
+    const fechaFin = new Date("2023-12-08T23:59:59Z");
+
+    const fechaAleatoria = new Date(fechaInicio.getTime() + Math.random() * (fechaFin.getTime() - fechaInicio.getTime()));
+            //fechaAleatoria.setHours(usuario.hora.split(':')[0]);
+            //fechaAleatoria.setMinutes(usuario.hora.split(':')[1]);
+            //fechaAleatoria.setSeconds(usuario.hora.split(':')[2]);
+    return fechaAleatoria.toString();
 }
 
 function sacarRgb(color){
