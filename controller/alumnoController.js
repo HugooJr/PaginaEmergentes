@@ -19,7 +19,7 @@ module.exports.crear = (req, res)=>{
         positivismo: reglas(req.body.frase, req.body.btnReaccion),
         clientIp: ip,
         personalidad: tercerColor(req.body.colorFondo1, req.body.colorFondo2, req.body.color3),
-        fecha: fechaCreacion();
+        fecha: fechaCreacion()
     })
     alumno.save(function(error,alumno){
         if(error){
