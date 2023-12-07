@@ -17,7 +17,6 @@ module.exports.crear = (req, res)=>{
         colorFondo2: req.body.colorFondo2,
         edad: req.body.edad,
         positivismo: reglas(req.body.frase, req.body.btnReaccion),
-        clientIp: ip,
         personalidad: tercerColor(req.body.colorFondo1, req.body.colorFondo2, req.body.color3),
         fecha: fechaCreacion()
     })
