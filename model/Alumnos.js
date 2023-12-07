@@ -11,4 +11,4 @@ const alumnoSchema = new Schema ({
     personalidad: String,
     fecha: Date
 }, {versionKey:false})
-module.exports = mongoose.model('alumnos', alumnoSchema)
+module.exports = mongoose.model('daaas', alumnoSchema)
