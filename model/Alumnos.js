@@ -8,7 +8,6 @@ const alumnoSchema = new Schema ({
     colorFondo2:String,
     edad:String,
     positivismo: Boolean,
-    clientIp: String,
     personalidad: String,
     fecha: Date
 }, {versionKey:false})
